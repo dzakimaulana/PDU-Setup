@@ -1,0 +1,38 @@
+version: '3'
+services:
+  frontend:
+    container_name: pdu-frontend
+    image: achmadluthfan/pdu-frontend:latest
+    environment:
+      APP: blabla
+    ports:
+      - "3000:3000"
+    command: ["executable", "arg"]
+    networks:
+      - my_network
+  
+  backend:
+    container_name: pdu-backend
+    image: dzakimaulana/pdu-backend:latest
+    environment:
+      APP: blabla
+    ports:
+      - "8080:8080"
+    command: ["npm", "run", "./src/app.js"]
+    networks:
+      - my_network
+  
+  ai:
+    container_name: pdu-ai
+    image: hafidz/pdu-ai:latest
+    environment:
+      APP: blabla
+    ports:
+      - "5000:5000"
+    command: ["python", "./src/app.py"]
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
