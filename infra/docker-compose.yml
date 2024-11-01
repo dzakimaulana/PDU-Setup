@@ -1,7 +1,7 @@
 version: '3'
 services:
   influxdb:
-    container_name: influxdb
+    container_name: influxdb-pdu
     image: influxdb:latest
     restart: unless-stopped
     ports:
@@ -28,10 +28,10 @@ services:
       retries: 3
       start_period: 30s
     networks:
-      - my_network
+      - pdu_network
 
   mosquitto:
-    container_name: mosquitto
+    container_name: mosquitto-pdu
     image: eclipse-mosquitto
     restart: unless-stopped
     environment:
@@ -43,10 +43,10 @@ services:
       - ./mosquitto/data:/mosquitto/data
       - ./mosquitto/log:/mosquitto/log
     networks:
-      - my_network
+      - pdu_network
 
   nodered:
-    container_name: nodered
+    container_name: nodered-pdu
     image: nodered/node-red
     restart: unless-stopped
     user: "0"
@@ -57,8 +57,8 @@ services:
     volumes:
       - ./nodered/data:/data
     networks:
-      - my_network
+      - pdu_network
 
 networks:
-  my_network:
+  pdu_network:
     driver: bridge
