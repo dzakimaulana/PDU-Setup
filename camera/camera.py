@@ -3,7 +3,7 @@ import numpy as np
 import paho.mqtt.client as mqtt
 
 broker_address = "localhost"
-port = 8883
+port = 1883
 topic = "test/camera"
 
 client = mqtt.Client()
@@ -68,7 +68,7 @@ while True:
             print("Ada batu")
             cv2.rectangle(frame1, (55, 300), (500, 450), (0, 127, 255), 3)
             deteksi.remove((cx, cy))
-            client.publish(topic, jumlah_batu)
+            client.publish(topic, jumlah_batu) # Publish
             print("Batu terdeteksi: " + str(jumlah_batu))
 
     cv2.putText(frame1, "JUMLAH BATU : " + str(jumlah_batu), (5, 70), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 5)
